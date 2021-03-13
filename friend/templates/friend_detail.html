@@ -3,11 +3,12 @@
 {% block content %}
 <div class="row m-5 px-5">
     <div class="col-12 col-lg-4">
-        {% if friend.photo %}
+        <!-- {% if friend.photo %}
         <img src="{{ friend.photo.url }}" class="img-fluid">
         {% else %}
         <img src="{% static 'img/icon.png' %}" class="img-fluid">
-        {% endif %}
+        {% endif %} -->
+        <img src="{% static 'img/Man.png' %}" class="img-fluid">
     </div>
     <div class="col-12 col-lg-4 mt-3">
         <p>氏名　 : {{ friend.friend_name }}</p>

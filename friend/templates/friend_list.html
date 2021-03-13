@@ -5,11 +5,12 @@
 <div class="row my-3" style="background-color: white;">
     {% for friend in friends %}
     <div class="col-4 col-lg-2 border px-3 pt-3">
-        {% if friend.photo %}
+        <!-- {% if friend.photo %}
         <img src="{{ friend.photo.url }}" class="img-fluid">
         {% else %}
         <img src="{% static 'img/icon.png' %}" class="img-fluid">
-        {% endif %}
+        {% endif %} -->
+        <img src="{% static 'img/Man.png' %}" class="img-fluid">
         <p class="text-left mt-2">氏名 　: {{ friend.friend_name }}</p>
         {% if friend.birth_day %}
             <p class="text-left">誕生日 : {{ friend.birth_day|date:"Y/n/j" }}</p>
