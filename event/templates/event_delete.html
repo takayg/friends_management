@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<form method='POST'>
+    {% csrf_token %}
+    <p>Really?</p>
+    <button type='submit'>Delete</button>
+    <a href="{% url 'event:event_detail' pk=event.pk %}">Cancel</a>
+</form>
+{% endblock %}

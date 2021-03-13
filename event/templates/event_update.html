@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="m-5">
+<form method='POST'>
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <div class="option my-2">
+        <button type='submit'>Update</button>
+        <a href="{% url 'event:event_detail' pk=event.pk %}" class="mx-2">Cancel</a>
+    </div>
+</form>
+</div>
+{% endblock %}

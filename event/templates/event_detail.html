@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="mt-5 row">
+    <div class="col-12 mt-3">
+        <h3 class="text-left mt-2">{{ event.event_name }}</h3>
+            <div class="ml-2">
+            <p class="text-left mt-3">日時 : {{ event.date }}</p>
+            {% if event.place != None %}
+            <p class="text-left mt-2">場所 : {{ event.place }}</p>
+            {% endif %}
+            <p class="text-left mt-2">友達 : 
+                {% for friend_name in friends_name %}
+                    <a href="{% url 'friend:friend_detail' pk=friend_name.pk %}">{{ friend_name }}　</a>
+                {% endfor %}
+            </p>
+            <p class="text-left mt-2">メモ :</p>
+            <p class="text-left mt-2 border">{{ event.memo | linebreaksbr}}</p>
+        </div>
+        <div class="form-group row justify-content-center">
+            <div class="mr-1">
+                <a href="{% url 'event:event_update' pk=event.pk %}" class="btn border py-0 border-dark rounded-0 font-weight-bold" style="background-color: #EEEEEE ;">Update</a>
+            </div>
+            <div class="ml-1">
+                <a href="{% url 'event:event_delete' pk=event.pk %}" class="btn border py-0 border-dark rounded-0 font-weight-bold" style="background-color: #EEEEEE ;">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

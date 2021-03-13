@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    table {
+        table-layout: fixed;
+    }
+
+    td > div {
+        height: 64px;
+        overflow: auto;
+        white-space: nowrap;
+    }
+
+    th > div {
+        height: 12px;
+    }
+</style>
+<div class="mt-1">
+    <form method="POST">
+    {% csrf_token %}
+    {{ form.year }}年{{ form.month }}月<button type='submit' class="mx-1">表示</button>
+    </form>
+    <p class="text-center m-0">
+        <a href="{% url 'event:calendar' prev_year prev_month %}">前月</a>
+        <span class="mx-2" style="font-size: x-large;">{{ year }}年{{ month }}月</span>
+        <a href="{% url 'event:calendar' next_year next_month %}">翌月</a>
+    </p>
+</div>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col"><div>Mon</div></th>
+            <th scope="col"><div>Tue</div></th>
+            <th scope="col"><div>Wed</div></th>
+            <th scope="col"><div>Thu</div></th>
+            <th scope="col"><div>Fri</div></th>
+            <th scope="col"><div>Sat</div></th>
+            <th scope="col"><div>Sun</div></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for week in weeks %}
+            <tr>
+            {% for day in week %}
+                {% if today_flag and today == day %}
+                    <td style="background-color: aliceblue;">
+                {% else %}
+                    <td>
+                {% endif %}
+                <div>
+                    {% if day != 0 %}
+                        <a href="{% url 'event:event_create' year month day %}">{{ day }}</a>
+                    {% endif %}
+                    {% for key, schedules in schedule_dic.items %}
+                        {% if day == key %}
+                            {% for schedule in schedules %}
+                                <p><a href="{% url 'event:event_detail' pk=schedule.pk %}">{{ schedule }}</a></p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                </td>
+            {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

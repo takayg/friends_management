@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<a href="{% url 'friend:friend_create' %}" class="btn border my-3 border-dark rounded-0 font-weight-bold" style="background-color: #EEEEEE ;">Add New Friend</a>
+<div class="row my-3" style="background-color: white;">
+    {% for friend in friends %}
+    <div class="col-4 col-lg-2 border px-3 pt-3">
+        {% if friend.photo %}
+        <img src="{{ friend.photo.url }}" class="img-fluid">
+        {% else %}
+        <img src="{% static 'img/icon.png' %}" class="img-fluid">
+        {% endif %}
+        <p class="text-left mt-2">氏名 　: {{ friend.friend_name }}</p>
+        {% if friend.birth_day %}
+            <p class="text-left">誕生日 : {{ friend.birth_day|date:"Y/n/j" }}</p>
+        {% else %}
+            <p class="text-left">誕生日 : 未登録</p>
+        {% endif %}
+        <p class="text-center">
+            <a href="{% url 'friend:friend_detail' pk=friend.pk %}" class="btn border py-0 border-dark rounded-0" style="background-color: #EEEEEE ;">Detail</a>
+        </p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+

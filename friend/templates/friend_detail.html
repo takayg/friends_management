@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row m-5 px-5">
+    <div class="col-12 col-lg-4">
+        {% if friend.photo %}
+        <img src="{{ friend.photo.url }}" class="img-fluid">
+        {% else %}
+        <img src="{% static 'img/icon.png' %}" class="img-fluid">
+        {% endif %}
+    </div>
+    <div class="col-12 col-lg-4 mt-3">
+        <p>氏名　 : {{ friend.friend_name }}</p>
+        {% if friend.birth_day %}
+            <p>誕生日 : {{ friend.birth_day }}</p>
+        {% else %}
+            <p>誕生日 : 未登録</p>
+        {% endif %}
+        <p>{{ friend.memo | linebreaksbr}}</p>
+    </div>
+    <div class="col-12 col-lg-4 mt-3">
+        <p>遊んだ回数　 : {{ event_count }}</p>
+        {% if event_count > 0 %}
+        <p>最近のイベント</p>
+        {% for event in last_5_events %}
+        <p>{{ event.date }}<a href="{% url 'event:event_detail' pk=event.pk %}"> {{ event }}</a></p>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+<div class="form-group row justify-content-center">
+    <div class="mr-1">
+        <a href="{% url 'friend:friend_update' pk=friend.pk %}" class="btn border py-0 border-dark rounded-0 font-weight-bold" style="background-color: #EEEEEE ;">Update</a>
+    </div>
+    <div class="ml-1">
+        <a href="{% url 'friend:friend_delete' pk=friend.pk %}" class="btn border py-0 border-dark rounded-0 font-weight-bold" style="background-color: #EEEEEE ;">Delete</a>
+    </div>
+</div>
+{% endblock %}

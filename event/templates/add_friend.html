@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="m-5">
+<form method='POST'>
+    {% csrf_token %}
+    {% for friend in friends %}
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="choice" value={{ friend.pk }}>
+        <label class="form-check-label" for="inlineCheckbox1">{{ friend.friend_name }}</label>
+    </div>
+    {% endfor %}
+    <div class="option my-2">
+        <button type='submit'>Add</button>
+        <a href="{% url 'event:calendar_redirect' %}" class="mx-2">Cancel</a>
+    </div>
+</form>
+</div>
+{% endblock %}
+

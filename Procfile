@@ -1,0 +1,1 @@
+web: gunicorn friends_management.wsgi --log-file -
