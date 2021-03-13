@@ -7,7 +7,10 @@ import sys
 def main():
     """Run administrative tasks."""
     # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'friends_management.settings')
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'friends_management.settings.local')
+    try:
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'friends_management.settings.local')
+    except:
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'friends_management.settings.product')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
