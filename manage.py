@@ -10,7 +10,7 @@ def main():
     try:
         os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'friends_management.settings.local')
     except:
-        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'friends_management.settings.product')
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'friends_management.settings.production')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
