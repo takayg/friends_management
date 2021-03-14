@@ -5,7 +5,7 @@
     <div class="col-12 mt-3">
         <h3 class="text-left mt-2">{{ event.event_name }}</h3>
             <div class="ml-2">
-            <p class="text-left mt-3">日時 : {{ event.date }}</p>
+            <p class="text-left mt-3">日時 : {{ event.date|date:"Y/n/j" }}</p>
             {% if event.place != None %}
             <p class="text-left mt-2">場所 : {{ event.place }}</p>
             {% endif %}
@@ -19,7 +19,7 @@
         </div>
         <div class="form-group row justify-content-center">
             <div class="mr-1">
-                <a href="{% url 'event:event_update' pk=event.pk %}" class="btn border py-0 border-dark rounded-0 font-weight-bold" style="background-color: #EEEEEE ;">Update</a>
+                <a href="{% url 'event:event_update' pk=event.pk %}" class="btn border py-0 border-dark rounded-0 font-weight-bold" style="background-color: #EEEEEE ;">Edit</a>
             </div>
             <div class="ml-1">
                 <a href="{% url 'event:event_delete' pk=event.pk %}" class="btn border py-0 border-dark rounded-0 font-weight-bold" style="background-color: #EEEEEE ;">Delete</a>

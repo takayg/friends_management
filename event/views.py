@@ -13,7 +13,7 @@ class CalendarRedirectView(LoginRequiredMixin, generic.RedirectView):
     date_now = datetime.datetime.now() # today's information
     url = '/event/calendar/' + str(date_now.year) + '/' + str(date_now.month)
 
-""" View for Calendar """
+""" View for the Calendar """
 class CalendarView(LoginRequiredMixin, generic.FormView):
 
     template_name = 'calendar.html'
@@ -125,55 +125,78 @@ def add_friend(request, pk):
 
 """ View for Displaying the Detail of the Event """
 class EventDetailView(LoginRequiredMixin, generic.DetailView):
+
     template_name = 'event_detail.html'
     model = Event
     context_object_name = 'event'
 
+    # making data for sending to html file
     def get_context_data(self, **kwargs):
+        # get primary key of the event from the url
         pk = self.kwargs.get('pk')
         context = super().get_context_data()
+        # get the friends information of the event
         event = Event.objects.filter(pk=pk)
         friends = event[0].friend_name.all()
         context['friends_name'] = friends
         return context
 
+""" View for Updating the Event """
 class EventUpdateView(LoginRequiredMixin, generic.UpdateView):
+
     template_name = 'event_update.html'
     model = Event
     form_class = EventForm
     context_object_name = 'event'
 
+    # determine the url redirect to when the input of the form is valid
     def get_success_url(self):
         return reverse_lazy('event:update_friend', 
         kwargs={'pk': self.kwargs['pk']})
     
+    # redirect to the url if the input of the form is valid
     def form_valid(self, form):
         return super().form_valid(form)
     
+    # display error message if the input of the form is invalid
     def form_invalid(self, form):
         return super().form_invalid(form)
 
+""" View for Updating Friend Information of the Event """
 @login_required
 def update_friend(request, pk):
+    # get the user information from the http request
     user = request.user
+    # get the event informaion using the primary key from the url
     event = Event.objects.get(pk=pk)
+    # GET request : display the form
     if request.method == 'GET':
+        # make choices to select friends
         friends = Friend.objects.filter(user=user).order_by('friend_name')
-        context = {'friends': friends}
-        return render(request, 'add_friend.html', context)
+        # send the choice to the html file if some friends are registered
+        if friends:
+            context = {'friends': friends}
+            return render(request, 'add_friend.html', context)
+        # finish the process if no friends are registered
+        else: 
+            url = reverse_lazy('event:event_detail', kwargs={'pk': pk})
+            return redirect(url)
+    # POST request : save the friend information in database
     else:
-        friends_id = request.POST.getlist("choice")
-        event.friend_name.clear()
+        friends_id = request.POST.getlist("choice") # get the selected friends from the form
+        event.friend_name.clear() # delete once and choose from the beginning
         for id in friends_id:
             event.friend_name.add(Friend.objects.get(id=int(id)))
         event.save()
         url = reverse_lazy('event:event_detail', kwargs={'pk': pk})
         return redirect(url)
 
+""" View for Deleting the Event """
 class EventDeleteView(LoginRequiredMixin, generic.DeleteView):
+
     template_name = 'event_delete.html'
     model = Event
-    success_url = reverse_lazy('event:calendar_redirect')
+    success_url = reverse_lazy('event:calendar_redirect') # the url redirect to when the input of the form is valid
     context_object_name = 'event'
 
     def delete(self, request, *args, **kwargs):

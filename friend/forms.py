@@ -2,8 +2,8 @@ from django import forms
 from .models import Friend
 import datetime
 
+""" Form for Friend """
 class FriendForm(forms.ModelForm):
-    """ Form for Friend """
    
     class Meta:
         model = Friend

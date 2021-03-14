@@ -10,7 +10,7 @@
     <div class="col-12 col-lg-4 mt-3">
         <p><strong>イベント一覧</strong></p>
         {% for event in events %}
-        <p>{{ event.date }}<a href="{% url 'event:event_detail' pk=event.pk %}"> {{ event }}</a></p>
+        <p>{{ event.date|date:"Y/n/j" }}<a href="{% url 'event:event_detail' pk=event.pk %}"> {{ event }}</a></p>
         {% endfor %}
         {% endif %}
     </div>

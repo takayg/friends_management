@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+""" match when url is [/]"""
+
 app_name = 'friend'
 
 urlpatterns = [

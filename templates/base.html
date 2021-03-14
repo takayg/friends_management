@@ -20,7 +20,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'friend:index' %}">Home</a>
                 </li>
-                <!-- ログイン時 -->
+                <!-- Login -->
                 {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'friend:friend_list' %}">Friend List</a>
@@ -31,7 +31,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
                 </li>
-                <!-- 未ログイン時 -->
+                <!-- Not Login -->
                 {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>

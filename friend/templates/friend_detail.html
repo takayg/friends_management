@@ -13,7 +13,7 @@
     <div class="col-12 col-lg-4 mt-3">
         <p>氏名　 : {{ friend.friend_name }}</p>
         {% if friend.birth_day %}
-            <p>誕生日 : {{ friend.birth_day }}</p>
+            <p>誕生日 : {{ friend.birth_day|date:"Y/n/j" }}</p>
         {% else %}
             <p>誕生日 : 未登録</p>
         {% endif %}
@@ -24,7 +24,7 @@
         {% if event_count > 0 %}
         <p>最近のイベント</p>
         {% for event in last_5_events %}
-        <p>{{ event.date }}<a href="{% url 'event:event_detail' pk=event.pk %}"> {{ event }}</a></p>
+        <p>{{ event.date|date:"Y/n/j" }}<a href="{% url 'event:event_detail' pk=event.pk %}"> {{ event }}</a></p>
         {% endfor %}
         <p><a href="{% url 'friend:friend_event_list' pk=friend.pk %}">全て表示</a></p>
         {% endif %}
@@ -32,7 +32,7 @@
 </div>
 <div class="form-group row justify-content-center">
     <div class="mr-1">
-        <a href="{% url 'friend:friend_update' pk=friend.pk %}" class="btn border py-0 border-dark rounded-0 font-weight-bold" style="background-color: #EEEEEE ;">Update</a>
+        <a href="{% url 'friend:friend_update' pk=friend.pk %}" class="btn border py-0 border-dark rounded-0 font-weight-bold" style="background-color: #EEEEEE ;">Edit</a>
     </div>
     <div class="ml-1">
         <a href="{% url 'friend:friend_delete' pk=friend.pk %}" class="btn border py-0 border-dark rounded-0 font-weight-bold" style="background-color: #EEEEEE ;">Delete</a>

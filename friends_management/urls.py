@@ -10,7 +10,7 @@ urlpatterns = [
     path('event/', include('event.urls')),
 ]
 
-# 開発サーバでメディアを配信できるようにする設定
+# Settings that allow media to be distributed on the development server
 urlpatterns += static(
     base.MEDIA_URL,
     document_root=base.MEDIA_ROOT
