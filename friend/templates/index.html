@@ -1,5 +1,38 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<div class="jumbotron">
+    <div class="container text-center">
+      <h1 class="display-3">Friends Management</h1>
+      <p>いつ誰とどこで遊んだか。</p>
+      <p>この子とはどれくらい遊んだか。</p>
+      <h4>すぐに思い出せますか？</h4>
+    </div>
+  </div>
 
+  <div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-4">
+        <h2><strong>Accounts</strong></h2>
+        <p>初めての方は<a href="{% url 'accounts:signup' %}">Sign Up</a>からアカウントを作成してください。</p>
+        <p>アカウントをお持ちの方は<a href="{% url 'accounts:login' %}">Log In</a>からログインしてください。</p>
+      </div>
+      <div class="col-md-4">
+        <h2><strong>Friend List</strong></h2>
+        <p>友達の一覧表示、詳細表示、追加、編集、削除が行えます。</p>
+        <p><a class="btn btn-secondary" href="{% url 'friend:friend_list' %}" role="button">Friend List</a></p>
+      </div>
+      <div class="col-md-4">
+        <h2><strong>Calendar</strong></h2>
+        <p>イベント内容を記載したカレンダーの表示やイベントの追加、編集、削除などが行えます。</p>
+        <p><a class="btn btn-secondary" href="{% url 'event:calendar_redirect' %}" role="button">Calendar</a></p>
+      </div>
+      
+      
+    </div>
+
+    <hr>
+
+  </div> <!-- /container -->
 {% endblock %}

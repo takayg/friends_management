@@ -14,7 +14,7 @@ class Login(LoginView):
 class Logout(LoginRequiredMixin, LogoutView):
     """ Logout Page """
 
-    template_name = 'login.html'
+    template_name = 'index.html'
 
 def signup(request):
     if request.method == 'POST':

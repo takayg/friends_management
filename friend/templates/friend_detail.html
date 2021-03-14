@@ -26,6 +26,7 @@
         {% for event in last_5_events %}
         <p>{{ event.date }}<a href="{% url 'event:event_detail' pk=event.pk %}"> {{ event }}</a></p>
         {% endfor %}
+        <p><a href="{% url 'friend:friend_event_list' pk=friend.pk %}">全て表示</a></p>
         {% endif %}
     </div>
 </div>

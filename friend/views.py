@@ -27,11 +27,26 @@ class FriendDetailView(LoginRequiredMixin, generic.DetailView):
 
     def get_context_data(self, **kwargs):
         pk = self.kwargs.get('pk')
+        user = self.request.user
         context = super().get_context_data()
-        friend = Friend.objects.filter(pk=pk)
+        friend = Friend.objects.filter(pk=pk, user=user)
         events = friend[0].event_set.order_by('-date')
         context['last_5_events'] = events[:5]
         context['event_count'] = len(events)
+        return context
+
+class FriendEventListView(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'friend_event_list.html'
+
+    def get_context_data(self, **kwargs):
+        pk = self.kwargs.get('pk')
+        user = self.request.user
+        context = super().get_context_data()
+        friend = Friend.objects.filter(pk=pk, user=user)
+        events = friend[0].event_set.order_by('-date')
+        context['events'] = events
+        context['event_count'] = len(events)
+        context['friend_name'] = friend[0].friend_name
         return context
 
 """ Friend Create """

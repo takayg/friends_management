@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row m-5 px-5">
+    <div class="col-12 col-lg-4 mt-3">
+        <p><strong>氏名</strong>　 : {{ friend_name }}</p>
+        <p><strong>遊んだ回数</strong>　 : {{ event_count }}</p>
+        {% if event_count > 0 %}
+    </div>
+    <div class="col-12 col-lg-4 mt-3">
+        <p><strong>イベント一覧</strong></p>
+        {% for event in events %}
+        <p>{{ event.date }}<a href="{% url 'event:event_detail' pk=event.pk %}"> {{ event }}</a></p>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
