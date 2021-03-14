@@ -1,21 +1,22 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
-from .forms import LoginForm
-from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from .forms import LoginForm
 
+""" View for Login """
 class Login(LoginView):
-    """ Login Page """
 
     form_class = LoginForm
     template_name = 'login.html'
 
+""" View for Logout """
 class Logout(LoginRequiredMixin, LogoutView):
-    """ Logout Page """
 
     template_name = 'index.html'
 
+""" View for Signup """
 def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)

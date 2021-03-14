@@ -1,7 +1,8 @@
 from django.contrib.auth.forms import AuthenticationForm
 
+
+""" Form for Login """
 class LoginForm(AuthenticationForm):
-    """Login Form"""
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
