@@ -12,11 +12,15 @@
 
   <div class="container">
     <div class="row">
+      {% if not user.is_authenticated %}
       <div class="col-md-4">
         <h2><strong>Accounts</strong></h2>
         <p>初めての方は<a href="{% url 'accounts:signup' %}">Sign Up</a>からアカウントを作成してください。</p>
         <p>アカウントをお持ちの方は<a href="{% url 'accounts:login' %}">Log In</a>からログインしてください。</p>
       </div>
+      {% else %}
+      <div class="col-md-2"></div>
+      {% endif %}
       <div class="col-md-4">
         <h2><strong>Friend List</strong></h2>
         <p>友達の一覧表示、詳細表示、追加、編集、削除が行えます。</p>
